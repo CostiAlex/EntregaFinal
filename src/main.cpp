@@ -11,18 +11,12 @@ void setLights(glm::mat4 P, glm::mat4 V);
 void drawObjectMat(Model model, Material material, glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawObjectTex(Model model, Textures textures, glm::mat4 P, glm::mat4 V, glm::mat4 M);
 
-void drawObject(Model model, glm::vec3 color, glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawAspa(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawHelice(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawCylinder(glm::mat4 P, glm::mat4 V, glm::mat4 M, Material mat);
-void drawCone(glm::mat4 P, glm::mat4 V, glm::mat4 M, glm::vec3 color);
-void drawCola(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawToroideCola(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawAspasCola(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawPatas(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawCabina(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-void drawHelicoptero(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawFarola(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawFarolas(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawCamino(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawCar(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 
 void funFramebufferSize(GLFWwindow* window, int width, int height);
 void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods);
@@ -35,11 +29,8 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
 
     // Modelos
     Model plane;
-    Model triangle;
-    Model cone;
     Model cylinder;
     Model sphere;
-    Model torus;
     Model tree;
     Model car;
     Model tree2;
@@ -54,12 +45,16 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
     Texture imgMoon;
     Texture imgEmerald;
     Texture imgBlue;
-    Texture  imgTree;
+    Texture imgTree;
+    Texture imgCamino;
+    Texture imgCamino_vol;
+    Texture imgGrass;
+    Texture imgGris;
 
     // Luces y Materiales
     #define   NLD 1
     #define   NLP 1
-    #define   NLF 1
+    #define   NLF 2
     Light     lightG;
     Light     lightD[NLD];
     Light     lightP[NLP];
@@ -76,6 +71,9 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
     Textures  texTriangle;
     Textures  texSphere;
     Textures  texTree;
+    Textures  texCamino;
+    Textures  texGrass;
+    Textures  texFarola;
 
 
     // Viewport
@@ -86,19 +84,17 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
     float desZ = 0.0;
     float desX = 0.0;
     float rotY = 0.0;
-    float rot_pata = 0.0;
-    float mov_pata = 0.0;
+    float rot_farola = 0.0;
     float rot_light = 0.0;
-    bool pausa;
-    bool custom_aspas;
     float rot_count;
     float rot_count2;
-    int num_aspas = 4;
     float vFovy = 50;
 
+    bool pausa;
     bool mouseButtonClic = false;
-    double cXpos, cYpos;
     bool ret = false;
+
+    double cXpos, cYpos;
 
     float alphaY = 25;
     float alphaX = 60;
@@ -179,17 +175,12 @@ void configScene() {
 
     // Modelos
     plane.initModel("resources/models/plane.obj");
-    triangle.initModel("resources/models/triangle.obj");
-    cone.initModel("resources/models/cone.obj");
     cylinder.initModel("resources/models/cylinder.obj");
     sphere.initModel("resources/models/sphere.obj");
-    torus.initModel("resources/models/torus.obj");
     tree.initModel("resources/models/Tree.obj");
     car.initModel("resources/models/car.obj");
     tree2.initModel("resources/models/Lowpoly_tree_sample.obj");
     tree3.initModel("resources/models/Tree3.obj");
-
-
 
     // Imagenes (texturas)
     imgNoEmissive.initTexture("resources/textures/img1.png");
@@ -200,9 +191,12 @@ void configScene() {
     imgEmerald.initTexture("resources/textures/img6.png");
     imgBlue.initTexture("resources/textures/img7.png");
     imgTree.initTexture("resources/textures/bark_0021.jpg");
+    imgCamino.initTexture("resources/textures/store.png");
+    imgCamino_vol.initTexture("resources/textures/storeNM.png");
+    imgGrass.initTexture("resources/textures/grass.jpg");
+    imgGris.initTexture("resources/textures/grey-concrete-texture.jpg");
 
     pausa = false;
-    custom_aspas = false;
     glfwSetTime(0.0f);
     rot_count = 0;
 
@@ -225,8 +219,8 @@ void configScene() {
     lightP[0].c2          = 0.20;
 
     // Luces focales
-    lightF[0].position    = glm::vec3(3.0,  3.0,  4.0);
-    lightF[0].direction   = glm::vec3( -3.0, -3.0, -4.0);
+    lightF[0].position    = glm::vec3(0.0,  3.0,  -4.0);
+    lightF[0].direction   = glm::vec3( 0.0, -3.0, 5.0);
     lightF[0].ambient     = glm::vec3( 0.2,  0.2,  0.2);
     lightF[0].diffuse     = glm::vec3( 0.9,  0.9,  0.9);
     lightF[0].specular    = glm::vec3( 0.9,  0.9,  0.9);
@@ -235,6 +229,17 @@ void configScene() {
     lightF[0].c0          = 1.000;
     lightF[0].c1          = 0.090;
     lightF[0].c2          = 0.032;
+
+    lightF[1].position    = glm::vec3(0.0,  3.0,  4.0);
+    lightF[1].direction   = glm::vec3( 0.0, -2.0, -4.0);
+    lightF[1].ambient     = glm::vec3( 0.2,  0.2,  0.2);
+    lightF[1].diffuse     = glm::vec3( 0.9,  0.9,  0.9);
+    lightF[1].specular    = glm::vec3( 0.9,  0.9,  0.9);
+    lightF[1].innerCutOff = 10.0;
+    lightF[1].outerCutOff = lightF[1].innerCutOff + 4.0;
+    lightF[1].c0          = 1.000;
+    lightF[1].c1          = 0.090;
+    lightF[1].c2          = 0.032;
 
     // Materiales
     mluz.ambient   = glm::vec4(0.0, 0.0, 0.0, 1.0);
@@ -308,6 +313,24 @@ void configScene() {
     texTree.emissive  = imgTree.getTexture();
     texTree.normal    = 0;
     texTree.shininess = 10.0;
+
+    texCamino.diffuse   = imgCamino.getTexture();
+    texCamino.specular  = imgCamino.getTexture();
+    texCamino.emissive  = imgCamino.getTexture();
+    texCamino.normal    = imgCamino_vol.getTexture();
+    texCamino.shininess = 10.0;
+
+    texGrass.diffuse   = imgGrass.getTexture();
+    texGrass.specular  = imgGrass.getTexture();
+    texGrass.emissive  = imgGrass.getTexture();
+    texGrass.normal    = 0;
+    texGrass.shininess = 10.0;
+
+    texFarola.diffuse   = imgGris.getTexture();
+    texFarola.specular  = imgGris.getTexture();
+    texFarola.emissive  = imgGris.getTexture();
+    texFarola.normal    = 0;
+    texFarola.shininess = 10.0;
 }
 
 void renderScene() {
@@ -320,7 +343,6 @@ void renderScene() {
     shaders.useShaders();
 
     // Matriz P
-//    float fovy   = 40.0;
     float fovy   = vFovy;
     float nplane =  0.1;
     float fplane = 50.0;
@@ -347,47 +369,28 @@ void renderScene() {
     glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
     drawSuelo(P,V,T_cutre*R_cutre);
 
-    // Dibujar plano fondo
+    drawArboles(P, V, I);
 
+    drawCar(P, V, I);
+
+    drawFarolas(P, V, I);
+
+    drawCamino(P, V, I);
+
+    // Dibujar plano fondo
     glm::mat4 Rp = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
     glm::mat4 Sp = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
     glm::mat4 Tp = glm::translate(I, glm::vec3(-3.6, 0.0, 0.0));
-
-    glm::mat4 R = glm::rotate(I, glm::radians(90.0f+rotY), glm::vec3(0,1,0));
-    glm::mat4 T = glm::translate(I, glm::vec3(desX,0.0,desZ));
-    //drawHelicoptero(P,V,T*R);
-
-
-    // #TODO aniadido para la practica final
-    glm::mat4 S_tree = glm::scale(I, glm::vec3(0.4, 0.4, 0.4));
-    glm::mat4 T_tree1 = glm::translate(I, glm::vec3(1.0,0.0,1.0));
-    glm::mat4 T_tree2 = glm::translate(I, glm::vec3(-1.0,0.0,2.0));
-    glm::mat4 T_tree3 = glm::translate(I, glm::vec3(-2.0,0.0,3.0));
-    //drawObjectMat(tree, cyan, P, V, T_tree1*S_tree);
-    //drawObjectMat(tree, cyan, P, V, T_tree2*S_tree);
-    //drawObjectMat(tree, cyan, P, V, T_tree3*S_tree);
-    drawObjectTex(tree, texTree, P, V, T_tree1*S_tree);
-    drawObjectTex(tree, texTree, P, V, T_tree2*S_tree);
-    drawObjectTex(tree, texTree, P, V, T_tree3*S_tree);
-    glm::mat4 S_car = glm::scale(I, glm::vec3(0.03, 0.03, 0.03));
-    glm::mat4 T_car = glm::translate(I, glm::vec3(desX,0.0,desZ));
-    drawObjectMat(car, ruby, P, V, T_car*S_car);
-
-    glm::mat4 S_tree2 = glm::scale(I, glm::vec3(0.07, 0.07, 0.07));
-    drawObjectTex(tree2, texTree, P, V, S_tree2);
-    //drawObjectMat(tree2, cyan, P, V, S_tree2);
-
-    glm::mat4 S_tree3 = glm::scale(I, glm::vec3(0.2, 0.2, 0.2));
-    glm::mat4 T_tree4 = glm::translate(I, glm::vec3(3.0,0.0,2.0));
-    drawObjectMat(tree3, cyan, P, V, T_tree4*S_tree3);
-
-
-
     glDepthMask(GL_FALSE);
     drawObjectMat(plane, emerald, P, V, Tp*Rp*Sp);
     glDepthMask(GL_TRUE);
 }
 
+/**
+ * Función que añade las luces definidas previamente a la escena.
+ * @param P
+ * @param V
+ */
 void setLights(glm::mat4 P, glm::mat4 V) {
 
     shaders.setLight("ulightG",lightG);
@@ -408,6 +411,14 @@ void setLights(glm::mat4 P, glm::mat4 V) {
     }
 }
 
+/**
+ * Función que dibuja un objeto, indicado por parámetro, en la escena aplicándole un material.
+ * @param model
+ * @param material
+ * @param P
+ * @param V
+ * @param M
+ */
 void drawObjectMat(Model model, Material material, glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
     shaders.setMat4("uN"  ,glm::transpose(glm::inverse(M)));
@@ -416,9 +427,16 @@ void drawObjectMat(Model model, Material material, glm::mat4 P, glm::mat4 V, glm
     shaders.setBool("uWithMaterials",true);
     shaders.setMaterial("umaterial",material);
     model.renderModel(GL_FILL);
-
 }
 
+/**
+ * Función que dibuja un objeto, indicado por parámetro, en la escena aplicándole una textura.
+ * @param model
+ * @param textures
+ * @param P
+ * @param V
+ * @param M
+ */
 void drawObjectTex(Model model, Textures textures, glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
     shaders.setMat4("uN"  ,glm::transpose(glm::inverse(M)));
@@ -429,186 +447,145 @@ void drawObjectTex(Model model, Textures textures, glm::mat4 P, glm::mat4 V, glm
     if(textures.normal!=0) shaders.setBool("uWithNormals",true);
     else                   shaders.setBool("uWithNormals",false);
     model.renderModel(GL_FILL);
-
 }
 
-void drawHelicoptero(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-    glm::mat4 T1 = glm::translate(I, glm::vec3(0,-0.05,0.0));
-    drawPatas(P,V,M*T1);
-
-    drawCola(P,V,M);
-
-    glm::mat4 RH = glm::rotate(I, glm::radians(rot_count), glm::vec3(0,1,0));
-    drawHelice(P,V,M*RH);
-
-    drawCabina(P,V,M);
-
+/**
+ * Función que dibuja el coche en la escena, aplicando el material que corresponda e
+ * implementando la lógica de movimiento del coche.
+ * @param P
+ * @param V
+ * @param M
+ */
+void drawCar(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+    glm::mat4 S_car = glm::scale(I, glm::vec3(0.03, 0.03, 0.03));
+    glm::mat4 T_car = glm::translate(I, glm::vec3(desX,0.0,desZ));
+    glm::mat4 R = glm::rotate(I, glm::radians(rotY), glm::vec3(0,1,0));
+    drawObjectMat(car, gold, P, V, T_car*S_car*R);
 }
 
+/**
+ * Función que dibuja los árboles en la escena, aplicando las texturas y materiales
+ * adecuados además de situar cada árbol en la posición que le corresponda.
+ * @param P
+ * @param V
+ * @param M
+ */
+void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+
+    glm::mat4 S_tree = glm::scale(I, glm::vec3(0.4, 0.4, 0.4));
+    glm::mat4 T_tree1 = glm::translate(I, glm::vec3(-2.6,0.0,-3.0));
+    glm::mat4 T_tree2 = glm::translate(I, glm::vec3(2.5,0.0,0.0));
+    glm::mat4 T_tree3 = glm::translate(I, glm::vec3(-2.3,0.0,2.4));
+    drawObjectTex(tree, texTree, P, V, T_tree1*S_tree);
+    drawObjectTex(tree, texTree, P, V, T_tree2*S_tree);
+    drawObjectTex(tree, texTree, P, V, T_tree3*S_tree);
+
+    glm::mat4 S_tree3 = glm::scale(I, glm::vec3(0.2, 0.2, 0.2));
+    glm::mat4 T_tree4 = glm::translate(I, glm::vec3(3.1,0.0,3.5));
+    glm::mat4 T_tree5 = glm::translate(I, glm::vec3(-2.7,0.0,0.0));
+    glm::mat4 T_tree6 = glm::translate(I, glm::vec3(2.7,0.0,-3.1));
+    drawObjectMat(tree3, cyan, P, V, T_tree4*S_tree3);
+    drawObjectMat(tree3, cyan, P, V, T_tree5*S_tree3);
+    drawObjectMat(tree3, cyan, P, V, T_tree6*S_tree3);
+}
+
+/**
+ * Función que encapsula la representación de las farolas en el plano. Calcula la posición
+ * de cada farola e implementa la lógica para rotar las farolas.
+ * @param P
+ * @param V
+ * @param M
+ */
+void drawFarolas(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
+
+    glm::mat4 T1 = glm::translate(I, glm::vec3(-1.0,0.0,-2.0));
+    glm::mat4 T2 = glm::translate(I, glm::vec3(-1.0,0.0,1.0));
+    glm::mat4 T3 = glm::translate(I, glm::vec3(1.0,0.0,2.0));
+    glm::mat4 T4 = glm::translate(I, glm::vec3(1.0,0.0,-1.0));
+    glm::mat4 R = glm::rotate(I, glm::radians(rot_farola), glm::vec3(0,1,0));
+    drawFarola(P,V,T1*M*R);
+    drawFarola(P,V,T2*M*R);
+    drawFarola(P,V,T3*M*R);
+    drawFarola(P,V,T4*M*R);
+}
+
+/**
+ * Función que dibuja las farolas en la escena, incluyendo las dos esferas
+ * a las que se aplica el material emisivo para simular luz.
+ * @param P
+ * @param V
+ * @param M
+ */
+void drawFarola(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+
+    // Dibujar pie farola
+    glm::mat4 S = glm::scale(I, glm::vec3(0.04,0.4,0.04));
+    glm::mat4 T = glm::translate(I, glm::vec3(0.0,0.4,0.0));
+    drawObjectTex(cylinder, texFarola, P, V, M*T*S);
+
+    // Dibujar brazo farola
+    glm::mat4 S1 = glm::scale(I, glm::vec3(0.03,0.2,0.03));
+    glm::mat4 T1 = glm::translate(I, glm::vec3(0.0,0.8,0.0));
+    glm::mat4 R1 = glm::rotate(I, glm::radians(90.0f), glm::vec3(0,0,1));
+    glm::mat4 R2 = glm::rotate(I, glm::radians(0.0f), glm::vec3(0,1,0));
+
+    drawObjectTex(cylinder, texFarola, P, V, M*R2*T1*R1*S1);
+
+    // Dibujar luz farola
+    glm::mat4 S_sp = glm::scale(I, glm::vec3(0.04,0.04,0.04));
+    glm::mat4 T_sp1 = glm::translate(I, glm::vec3(0.2,0.8,0.0));
+    glm::mat4 T_sp2 = glm::translate(I, glm::vec3(-0.2,0.8,0.0));
+
+    drawObjectMat(sphere, mluz, P, V, M*T_sp1*S_sp);
+    drawObjectMat(sphere, mluz, P, V, M*T_sp2*S_sp);
+}
+
+/**
+ * Función que dibuja un plano encima del plano general, al cual aplicaremos una textura
+ * específica para simular un camino de piedras.
+ * @param P
+ * @param V
+ * @param M
+ */
+void drawCamino(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+
+    glm::mat4 S = glm::scale(I, glm::vec3(1.0,1.0,3.6));
+    glm::mat4 T = glm::translate(I, glm::vec3(0.0,0.01,0.0));
+    drawObjectTex(plane, texCamino, P, V, M*T*S);
+}
+
+/**
+ * Función que dibuja el plano de nuestra escena, sobre el que irán colocados
+ * el resto de elementos.
+ * @param P
+ * @param V
+ * @param M
+ */
 void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
     glm::mat4 S = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
-    drawObjectTex(plane, texSuelo, P, V, M*S);
+    drawObjectTex(plane, texGrass, P, V, M*S);
 }
 
+/**
+ * Función que dibuja uncilindro, aplicándole el material correspondiente.
+ * @param P
+ * @param V
+ * @param M
+ * @param mat
+ */
 void drawCylinder(glm::mat4 P, glm::mat4 V, glm::mat4 M, Material mat){
 
     drawObjectMat(cylinder, mat, P, V, M);
 }
 
-void drawCone(glm::mat4 P, glm::mat4 V, glm::mat4 M, Material mat){
-
-    drawObjectMat(cone, mat, P, V, M);
-
-}
-
-void drawAspa(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-
-    glm::mat4 Rz90 = glm::rotate(I, glm::radians(90.0f), glm::vec3(0, 0, 1));
-    glm::mat4 S    = glm::scale(I, glm::vec3(0.025,0.185,0.07));
-    glm::mat4 T1   = glm::translate(I, glm::vec3(0.0,-0.6,0.0));
-    glm::mat4 T2   = glm::translate(I, glm::vec3(-0.1,0.0,0.0));
-
-    drawObjectMat(cone, ruby2, P, V, M*T2*Rz90*T1*S);
-
-}
-
-void drawHelice(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-
-    if(custom_aspas){
-        glm::mat4 T = glm::translate(I,glm::vec3(0.0,0.9,0.0));
-        glm::mat4 RyNum = glm::rotate(I, glm::radians(360.0f/num_aspas), glm::vec3(0, 1, 0));
-        glm::mat4 aux;
-        for(int i = 1; i < num_aspas+1; i++){
-            aux = RyNum;
-            if( i == 1)
-                drawAspa(P,V,M*T);
-            else
-                for(int j = 2; j < i; j++)
-                    aux *= RyNum;
-                drawAspa(P,V,M*aux*T);
-        }
-    } else {
-        glm::mat4 Ry90 = glm::rotate(I, glm::radians(90.0f), glm::vec3(0, 1, 0));
-        glm::mat4 T = glm::translate(I,glm::vec3(0.0,0.9,0.0));
-        drawAspa(P,V,M*T);
-        drawAspa(P,V,M*Ry90*T);
-        drawAspa(P,V,M*Ry90*Ry90*T);
-        drawAspa(P,V,M*Ry90*Ry90*Ry90*T);
-    }
-
-    glm::mat4 T3 = glm::translate(I,glm::vec3(0.0,0.85,0.0));
-    glm::mat4 S3 = glm::scale(I, glm::vec3(0.05, 0.05, 0.05));
-
-    drawObjectMat(cylinder, cyan, P, V, M*T3*S3);
-
-}
-
-void drawPatas(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-
-    //// Rotaciones y traslado patas
-    glm::mat4 R_izq = glm::rotate(I, glm::radians(rot_pata), glm::vec3(1,0,0));
-    glm::mat4 R_der = glm::rotate(I, glm::radians(-rot_pata), glm::vec3(1,0,0));
-    glm::mat4 T_izq = glm::translate(I, glm::vec3(0.0,0.0,mov_pata));
-    glm::mat4 T_der = glm::translate(I, glm::vec3(0.0,0.0,-mov_pata));
-
-    glm::mat4 R_izq_Suelo = glm::rotate(I, glm::radians(rot_pata), glm::vec3(1,0,0));
-    glm::mat4 R_der_Suelo = glm::rotate(I, glm::radians(-rot_pata), glm::vec3(1,0,0));
-
-
-    //// Cilindros apoyados en el suelo
-    glm::mat4 S_FloorCylinder = glm::scale(I, glm::vec3(0.05,0.6,0.05));
-    glm::mat4 R_FloorCylinder = glm::rotate   (I, glm::radians(90.0f), glm::vec3(0, 0, 1));
-    glm::mat4 T_FloorCylinder = glm::translate(I, glm::vec3(0.1,0.0,-0.4));
-    glm::mat4 T_FloorCylinder_2 = glm::translate(I, glm::vec3(0.1,0.0,0.4));
-
-    drawCylinder(P, V, M*T_izq*R_izq_Suelo*R_FloorCylinder*T_FloorCylinder*S_FloorCylinder, bronze);
-    drawCylinder(P, V, M*T_der*R_der_Suelo*R_FloorCylinder*T_FloorCylinder_2*S_FloorCylinder, bronze);
-
-    //// Cylindros patas inclinados
-    glm::mat4 S_BodyCylinder_2 = glm::scale(I, glm::vec3(0.05,0.3,0.05));
-
-    glm::mat4 R_BodyCylinder_2 = glm::rotate   (I, glm::radians(-45.0f), glm::vec3(1, 0, 0));
-    glm::mat4 R_BodyCylinder_3 = glm::rotate   (I, glm::radians(45.0f), glm::vec3(1, 0, 0));
-
-    glm::mat4 T_BodyCylinder_3 = glm::translate(I, glm::vec3(0.3,0.3,0.2));
-    glm::mat4 T_BodyCylinder_4 = glm::translate(I, glm::vec3(-0.3,0.3,0.2));
-    glm::mat4 T_BodyCylinder_5 = glm::translate(I, glm::vec3(0.3,0.3,-0.2));
-    glm::mat4 T_BodyCylinder_6 = glm::translate(I, glm::vec3(-0.3,0.3,-0.2));
-
-    drawCylinder(P, V, M*T_der*T_BodyCylinder_3*R_der*R_BodyCylinder_2*S_BodyCylinder_2, bronze);
-    drawCylinder(P, V, M*T_der*T_BodyCylinder_4*R_der*R_BodyCylinder_2*S_BodyCylinder_2, bronze);
-    drawCylinder(P, V, M*T_izq*T_BodyCylinder_5*R_izq*R_BodyCylinder_3*S_BodyCylinder_2, bronze);
-    drawCylinder(P, V, M*T_izq*T_BodyCylinder_6*R_izq*R_BodyCylinder_3*S_BodyCylinder_2, bronze);
-}
-
-void drawCola(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-
-    //// Cono amarillo de la cola
-    glm::mat4 S_RearCone = glm::scale(I, glm::vec3(0.08, 0.22, 0.05));
-    glm::mat4 R_RearCone = glm::rotate(I, glm::radians(-80.0f), glm::vec3(0, 0, 1));
-    glm::mat4 T_RearCone = glm::translate(I, glm::vec3(0.9, 0.6, 0));
-
-    drawCone(P, V, M * T_RearCone * R_RearCone * S_RearCone, gold);
-
-    //// Cilindro de la cola
-    glm::mat4 S_RearCyl   = glm::scale(I, glm::vec3(0.1, 0.2, 0.05));
-    glm::mat4 R_RearCyl_X = glm::rotate(I, glm::radians(90.0f), glm::vec3(1, 0, 0));
-    glm::mat4 R_RearCyl_Z = glm::rotate(I, glm::radians(10.0f), glm::vec3(0, 0, 1));
-    glm::mat4 T_RearCyl   = glm::translate(I, glm::vec3(1.1, 0.62, 0.0));
-
-    drawCylinder(P, V, M * T_RearCyl * R_RearCyl_Z * R_RearCyl_X * S_RearCyl, cyan);
-
-    //// Toroide de la cola
-    drawToroideCola(P, V, M);
-}
-
-void drawToroideCola(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-
-    glm::mat4 S_Torus = glm::scale(I, glm::vec3(0.166,0.2,0.166));
-    glm::mat4 R_Torus = glm::rotate(I, glm::radians(90.0f), glm::vec3(1,0,0));
-    glm::mat4 T_Torus = glm::translate(I, glm::vec3(1.5,0.7,0.0));
-
-    glm::mat4 RHC = glm::rotate(I, glm::radians(rot_count2), glm::vec3(0, 0, 1));
-    drawAspasCola(P, V, M*T_Torus*RHC);
-
-    drawObjectMat(torus, cyan, P, V, M*T_Torus*R_Torus*S_Torus);
-}
-
-void drawAspasCola(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-
-    glm::mat4 S_Triangle = glm::scale(I, glm::vec3(0.015,0.10,0.0));
-
-    glm::mat4 R_51Z  = glm::rotate(I, glm::radians(51.0f),  glm::vec3(0,0,1));
-    glm::mat4 R_102Z = glm::rotate(I, glm::radians(102.0f), glm::vec3(0,0,1));
-    glm::mat4 R_153Z = glm::rotate(I, glm::radians(153.0f), glm::vec3(0,0,1));
-    glm::mat4 R_204Z = glm::rotate(I, glm::radians(204.0f), glm::vec3(0,0,1));
-    glm::mat4 R_255Z = glm::rotate(I, glm::radians(255.0f), glm::vec3(0,0,1));
-    glm::mat4 R_306Z = glm::rotate(I, glm::radians(306.0f), glm::vec3(0,0,1));
-
-    drawObjectTex(triangle, texTriangle, P, V, M*S_Triangle);
-    drawObjectTex(triangle, texTriangle, P, V, M*R_51Z*S_Triangle);
-    drawObjectTex(triangle, texTriangle, P, V, M*R_102Z*S_Triangle);
-    drawObjectTex(triangle, texTriangle, P, V, M*R_153Z*S_Triangle);
-    drawObjectTex(triangle, texTriangle, P, V, M*R_204Z*S_Triangle);
-    drawObjectTex(triangle, texTriangle, P, V, M*R_306Z*S_Triangle);
-    drawObjectTex(triangle, texTriangle, P, V, M*R_255Z*S_Triangle);
-
-}
-
-void drawCabina(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-
-    //// Verde
-    glm::mat4 T1 = glm::translate(I,glm::vec3(0.0,0.5,0.0));
-    glm::mat4 S1 = glm::scale(I, glm::vec3(0.33, 0.15, 0.2));
-    drawObjectTex(sphere, texSphere, P, V, M*T1*S1);
-
-    //// Magenta
-    glm::mat4 T2 = glm::translate(I,glm::vec3(-0.5,0.6,0.0));
-    glm::mat4 S2 = glm::scale(I, glm::vec3(0.12, 0.1, 0.12));
-    drawObjectMat(sphere, ruby, P, V, M*T2*S2);
-}
-
+/**
+ * Función callback que calcula el tamaño de la ventana cada vez que esta es
+ * redimensionada.
+ * @param window
+ * @param width
+ * @param height
+ */
 void funFramebufferSize(GLFWwindow* window, int width, int height) {
 
     // Configuracion del Viewport
@@ -619,6 +596,14 @@ void funFramebufferSize(GLFWwindow* window, int width, int height) {
     h = height;
 }
 
+/**
+ * Función callback que implementa la interacción con la escena mediante teclado.
+ * @param window
+ * @param key
+ * @param scancode
+ * @param action
+ * @param mods
+ */
 void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
 
     switch(key) {
@@ -650,33 +635,16 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
 
             break;
 
-        /// Rotacion patas
-        case GLFW_KEY_RIGHT: if(rot_pata < 45){rot_pata += 5;} break;
-        case GLFW_KEY_LEFT: if(rot_pata > 0){rot_pata -= 5;} break;
+        /// Rotacion coche
+        case GLFW_KEY_RIGHT: rot_farola += 5; break;
+        case GLFW_KEY_LEFT: rot_farola -= 5; break;
 
-        /// Plegado patas
-        case GLFW_KEY_UP: if(rot_pata == 45){mov_pata += 0.05;} break;
-        case GLFW_KEY_DOWN: if(rot_pata == 45){mov_pata -= 0.05;} break;
-
-        /// Numero de aspas helice principal
-        case GLFW_KEY_1: num_aspas = 1; custom_aspas = true; break;
-        case GLFW_KEY_2: num_aspas = 2; custom_aspas = true; break;
-        case GLFW_KEY_3: num_aspas = 3; custom_aspas = true; break;
-        case GLFW_KEY_4: num_aspas = 4; custom_aspas = true; break;
-        case GLFW_KEY_5: num_aspas = 5; custom_aspas = true; break;
-        case GLFW_KEY_6: num_aspas = 6; custom_aspas = true; break;
-        case GLFW_KEY_7: num_aspas = 7; custom_aspas = true; break;
-        case GLFW_KEY_8: num_aspas = 8; custom_aspas = true; break;
-        case GLFW_KEY_9: num_aspas = 9; custom_aspas = true; break;
-
-        /// Reset helicoptero a posicion inicial
+        /// Reset escena a situación inicial
         case GLFW_KEY_Q:
             desX = 0.0;
             desZ = 0.0;
             rotY = 0.0;
-            rot_pata = 0.0;
-            num_aspas = 4;
-            mov_pata = 0.0;
+            rot_farola = 0.0;
             rot_light = 0.0;
             lightD->ambient = glm::vec3(0.1,0.1,0.1);
             break;
@@ -708,6 +676,12 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
     }
 }
 
+/**
+ * Función callback que regula la interacción de la rueda del ratón con la escena.
+ * @param window
+ * @param xoffset
+ * @param yoffset
+ */
 void funSetScroll(GLFWwindow* window, double xoffset, double yoffset) {
 
     float aux = vFovy;
