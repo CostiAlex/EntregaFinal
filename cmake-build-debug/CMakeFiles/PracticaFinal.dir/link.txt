@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\PracticaFinal.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\PracticaFinal.dir/objects.a @CMakeFiles\PracticaFinal.dir\objects1.rsp
+C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\PracticaFinal.dir/objects.a -Wl,--no-whole-archive -o binary\PracticaFinal.exe -Wl,--out-implib,libPracticaFinal.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\PracticaFinal.dir\linklibs.rsp
