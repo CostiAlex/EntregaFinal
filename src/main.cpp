@@ -66,11 +66,12 @@ void movimiento();
     Texture imgSkyBox4;
     Texture imgSkyBox5;
     Texture imgSkyBox6;
+    Texture imgHerb;
 
     // Luces y Materiales
     #define   NLD 1
     #define   NLP 1
-    #define   NLF 2
+    #define   NLF 4
     Light     lightG;
     Light     lightD[NLD];
     Light     lightP[NLP];
@@ -92,6 +93,7 @@ void movimiento();
     Textures  texGrass;
     Textures  texFarola;
     Textures  texRoad;
+    Textures  texHerb;
     Textures  texSkyBox1;
     Textures  texSkyBox2;
     Textures  texSkyBox3;
@@ -141,6 +143,14 @@ void movimiento();
     float desplL2 = 0.8;
     float desplL3 = -0.8;
     float desplL4 = -2.4;
+
+    float desplGrass1 = -2.4;
+    float desplGrass2 =    0;
+    float desplGrass3 = -1.2;
+    float desplGrass4 =  1.2;
+
+    float desplLuz1 = -3.4;
+    float desplLuz2 = -1.4;
 
     bool pausa;
     bool mouseButtonClic = false;
@@ -259,6 +269,7 @@ void configScene() {
 
     imgAsphalt.initTexture("resources/textures/Asphalt_002_COLOR.jpg");
     imgAsphaltN.initTexture("resources/textures/Asphalt_002_NORM.jpg");
+    imgHerb.initTexture("resources/textures/Stylized_Grass_003_basecolor.jpg");
 
     imgSkyBox1.initTexture("resources/textures/skyBox/1.jpg");
     imgSkyBox2.initTexture("resources/textures/skyBox/2.jpg");
@@ -311,6 +322,29 @@ void configScene() {
     lightF[1].c0          = 1.000;
     lightF[1].c1          = 0.090;
     lightF[1].c2          = 0.032;
+
+    lightF[2].position    = glm::vec3(0.0,  3.0,  -2.0);
+    lightF[2].direction   = glm::vec3( 0.0, -1.0, 0.0);
+    lightF[2].ambient     = glm::vec3( 0.2,  0.2,  0.2);
+    lightF[2].diffuse     = glm::vec3( 0.9,  0.9,  0.9);
+    lightF[2].specular    = glm::vec3( 0.9,  0.9,  0.9);
+    lightF[2].innerCutOff = 10.0;
+    lightF[2].outerCutOff = lightF[2].innerCutOff + 4.0;
+    lightF[2].c0          = 1.000;
+    lightF[2].c1          = 0.090;
+    lightF[2].c2          = 0.032;
+
+    lightF[3].position    = glm::vec3(0.0,  3.0,  2.0);
+    lightF[3].direction   = glm::vec3( 0.0, -1.0, 0.0);
+    lightF[3].ambient     = glm::vec3( 0.2,  0.2,  0.2);
+    lightF[3].diffuse     = glm::vec3( 0.9,  0.9,  0.9);
+    lightF[3].specular    = glm::vec3( 0.9,  0.9,  0.9);
+    lightF[3].innerCutOff = 10.0;
+    lightF[3].outerCutOff = lightF[3].innerCutOff + 4.0;
+    lightF[3].c0          = 1.000;
+    lightF[3].c1          = 0.090;
+    lightF[3].c2          = 0.032;
+
 
     // Materiales
     mluz.ambient   = glm::vec4(0.0, 0.0, 0.0, 1.0);
@@ -409,6 +443,12 @@ void configScene() {
     texRoad.normal    = imgAsphaltN.getTexture();;
     texRoad.shininess = 10.0;
 
+    texHerb.diffuse   = imgHerb.getTexture();
+    texHerb.specular  = imgHerb.getTexture();
+    texHerb.emissive  = imgHerb.getTexture();
+    texHerb.normal    = imgHerb.getTexture();;
+    texHerb.shininess = 10.0;
+
     texSkyBox1.diffuse   = imgSkyBox1.getTexture();
     texSkyBox1.specular  = imgSkyBox1.getTexture();
     texSkyBox1.emissive  = imgSkyBox1.getTexture();
@@ -477,7 +517,7 @@ void renderScene() {
     setLights(P,V);
 
     // Dibujamos la escena
-    //drawSuelo(P,V,I);
+    drawSuelo(P,V,I);
 
     glm::mat4 T_cutre = glm::translate(I, glm::vec3(0.0,-0.01,0.0));
     glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
@@ -579,12 +619,6 @@ void setLights(glm::mat4 P, glm::mat4 V) {
     glm::mat4 M2 = glm::translate(I,aux_pos2) * glm::scale(I,glm::vec3(0.05*0.5));
     drawObjectTex(sphere, texLight, P, V, T2*M2);
 
-    /*for(int i=0; i<NLF; i++) {
-        glm::mat4 R = glm::translate(I, glm::vec3(0.0,0.0,0));
-        lightP[i].position = glm::vec3(R*glm::vec4(1.0))*glm::vec3(-1.0,1.0,-1.0);
-        glm::mat4 M = glm::translate(I,lightF[i].position) * glm::scale(I,glm::vec3(0.05*0.5));
-        drawObjectTex(sphere, texLight, P, V, M);
-    }*/
 }
 
 /**
@@ -758,8 +792,35 @@ void drawCamino(glm::mat4 P, glm::mat4 V, glm::mat4 M){
  */
 void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
-    glm::mat4 S = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
-    drawObjectTex(plane, texGrass, P, V, M*S);
+    glm::mat4 Sg = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
+    glm::mat4 Tg = glm::translate(I, glm::vec3(0.0,0.0,0));
+    //drawObjectTex(plane, texGrass, P, V, M*S);
+    drawObjectTex(plane, texHerb, P, V, M*Tg*Sg);
+
+
+    glm::mat4 S = glm::scale(I, glm::vec3(3.6, 1.0, 1.2));
+    glm::mat4 TS1 = glm::translate(I, glm::vec3(0.0,0.008,-2.4));
+    glm::mat4 TS2 = glm::translate(I, glm::vec3(0.0,0.008,   0));
+    glm::mat4 TS3 = glm::translate(I, glm::vec3(0.0,0.008, 2.4));
+
+    drawObjectTex(plane, texHerb, P, V, M*TS1*S);
+    drawObjectTex(plane, texHerb, P, V, M*TS2*S);
+    drawObjectTex(plane, texHerb, P, V, M*TS3*S);
+
+
+    glm::mat4 S1 = glm::scale(I, glm::vec3(1.8, 1.0, 1.2));
+
+    glm::mat4 T1 = glm::translate(I, glm::vec3(1.8,0.009,desplGrass1));
+    drawObjectTex(plane, texHerb, P, V, M*T1*S1);
+
+    glm::mat4 T2 = glm::translate(I, glm::vec3(1.8,0.009,desplGrass2));
+    drawObjectTex(plane, texHerb, P, V, M*T2*S1);
+
+    glm::mat4 T3 = glm::translate(I, glm::vec3(-1.8,0.009,desplGrass3));
+    drawObjectTex(plane, texHerb, P, V, M*T3*S1);
+
+    glm::mat4 T4 = glm::translate(I, glm::vec3(-1.8,0.009,desplGrass4));
+    drawObjectTex(plane, texHerb, P, V, M*T4*S1);
 }
 
 /**
@@ -887,6 +948,8 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
             desArbolZ4 = -3.6;
             desArbolZ5 = -1.2;
             desArbolZ6 = 1.2;
+            desplLuz1 = -3.4;
+            desplLuz2 = -1.4;
             lightD->ambient = glm::vec3(0.1,0.1,0.1);
             break;
 
@@ -907,8 +970,14 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
             if( action == GLFW_PRESS){
                 if(lightF[0].c0 == 1.0){
                     lightF[0].c0 = 0.0;
+                    lightF[1].c0 = 0.0;
+                    lightF[2].c0 = 0.0;
+                    lightF[3].c0 = 0.0;
                 } else {
                     lightF[0].c0 = 1.000;
+                    lightF[1].c0 = 1.000;
+                    lightF[2].c0 = 1.000;
+                    lightF[3].c0 = 1.000;
                 }
             }
             break;
@@ -1011,6 +1080,21 @@ void movimiento() {
     else if(desplL4 > 3.2)
         desplL4 = -3.2;
 
+
+    desplLuz1 += varianza;
+    desplLuz2 += varianza;
+
+    lightF[2].position[2] = lightF[2].position[2] + desplLuz1/20;
+    lightF[3].position[2] = lightF[3].position[2] + desplLuz2/20;
+
+
+    if(desplLuz1 > 3.6){
+        desplLuz1 = -3.6;
+    }
+    if(desplLuz2 > 3.6) {
+        desplLuz2 = -3.6;
+    }
+
     if (desArbolZ1 > 3.6) {
         desArbolZ1 = -3.6;
         desArbol1 = -1.0 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (-2.9)));
@@ -1031,4 +1115,17 @@ void movimiento() {
         desArbol6 = 1.0 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(3.3-1.0)));
     }
 
+    desplGrass1 += varianza;
+    desplGrass2 += varianza;
+    desplGrass3 += varianza;
+    desplGrass4 += varianza;
+
+    if(desplGrass1 > 2.4)
+        desplGrass1 = -2.4;
+    else if(desplGrass2 > 2.4)
+        desplGrass2 = -2.4;
+    else if(desplGrass3 > 2.4)
+        desplGrass3 = -2.4;
+    else if(desplGrass4 > 2.4)
+        desplGrass4 = -2.4;
 }

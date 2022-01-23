@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/Model.cpp" "C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj"
-  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/Shaders.cpp" "C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj"
-  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/Texture.cpp" "C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj"
-  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/main.cpp" "C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/main.cpp.obj"
+  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.cpp" "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj"
+  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.cpp" "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj"
+  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.cpp" "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj"
+  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/main.cpp" "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir/src/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

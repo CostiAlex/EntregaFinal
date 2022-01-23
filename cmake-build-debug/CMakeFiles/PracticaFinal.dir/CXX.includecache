@@ -1098,7 +1098,11 @@ detail/type_vec4.hpp
 detail/func_vector_relational.hpp
 ../../libraries2122/glm/include/glm/detail/func_vector_relational.hpp
 
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/Model.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.cpp
+Model.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.h
+
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.h
 iostream
 -
 vector
@@ -1116,7 +1120,11 @@ assimp/scene.h
 assimp/postprocess.h
 -
 
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/Shaders.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.cpp
+Shaders.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.h
+
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.h
 iostream
 -
 fstream
@@ -1132,7 +1140,11 @@ glm/gtc/matrix_transform.hpp
 sstream
 -
 
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/Texture.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.cpp
+Texture.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.h
+
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.h
 iostream
 -
 GL/glew.h
@@ -1140,7 +1152,7 @@ GL/glew.h
 FreeImage.h
 -
 
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/main.cpp
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/main.cpp
 iostream
 -
 GL/glew.h
@@ -1148,9 +1160,9 @@ GL/glew.h
 GLFW/glfw3.h
 -
 Shaders.h
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/Shaders.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.h
 Model.h
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/Model.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.h
 Texture.h
-C:/Users/Vicente/CLionProjects/PracticaFinal/src/Texture.h
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.h
 
