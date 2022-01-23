@@ -19,6 +19,7 @@ void drawCamino(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawCar(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawSkyBox(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawCrystalBall(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 
 void funFramebufferSize(GLFWwindow* window, int width, int height);
 void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods);
@@ -69,7 +70,7 @@ void movimiento();
     // Luces y Materiales
     #define   NLD 1
     #define   NLP 1
-    #define   NLF 1
+    #define   NLF 2
     Light     lightG;
     Light     lightD[NLD];
     Light     lightP[NLP];
@@ -112,6 +113,8 @@ void movimiento();
     float rot_count;
     float rot_count2;
     float vFovy = 50;
+    float mov_l1 = 0.0;
+    float mov_l2 = 0.0;
 
     float desFarola1 = -3.6;
     float desFarola2 = -2.4;
@@ -119,6 +122,20 @@ void movimiento();
     float desFarola4 = 0;
     float desFarola5 = 1.2;
     float desFarola6 = 2.4;
+
+    float desArbol1 = -2.4;
+    float desArbol2 = 2.5;
+    float desArbol3 = -2.3;
+    float desArbol4 = 3.1;
+    float desArbol5 = -2.7;
+    float desArbol6 = 2.7;
+
+    float desArbolZ1 = -2.4;
+    float desArbolZ2 = 0;
+    float desArbolZ3 = 2.4;
+    float desArbolZ4 = -3.6;
+    float desArbolZ5 = -1.2;
+    float desArbolZ6 = 1.2;
 
     float desplL1 = 2.4;
     float desplL2 = 0.8;
@@ -129,6 +146,10 @@ void movimiento();
     bool mouseButtonClic = false;
     double cXpos, cYpos;
     bool ret = false;
+
+    glm::vec3 aux_pos1 = glm::vec3(0.0,  3.0,  -2.0);
+    glm::vec3 aux_pos2 = glm::vec3(0.0,  3.0,  2.0);
+
 
 //    float alphaY = 25;
 //    float alphaX = 60;
@@ -153,7 +174,7 @@ int main() {
 
     // Creamos la ventana
     GLFWwindow* window;
-    window = glfwCreateWindow(w, h, "Practica 3", NULL, NULL);
+    window = glfwCreateWindow(w, h, "PracticaFinal", NULL, NULL);
     if(!window) {
         glfwTerminate();
         return -1;
@@ -269,8 +290,8 @@ void configScene() {
     lightP[0].c2          = 0.20;
 
     // Luces focales
-    lightF[0].position    = glm::vec3(0.0,  3.0,  -4.0);
-    lightF[0].direction   = glm::vec3( 0.0, -3.0, 5.0);
+    lightF[0].position    = glm::vec3(0.0,  3.0,  -2.0);
+    lightF[0].direction   = glm::vec3( 0.0, -1.0, 0.0);
     lightF[0].ambient     = glm::vec3( 0.2,  0.2,  0.2);
     lightF[0].diffuse     = glm::vec3( 0.9,  0.9,  0.9);
     lightF[0].specular    = glm::vec3( 0.9,  0.9,  0.9);
@@ -280,8 +301,8 @@ void configScene() {
     lightF[0].c1          = 0.090;
     lightF[0].c2          = 0.032;
 
-    lightF[1].position    = glm::vec3(0.0,  3.0,  4.0);
-    lightF[1].direction   = glm::vec3( 0.0, -2.0, -4.0);
+    lightF[1].position    = glm::vec3(0.0,  3.0,  2.0);
+    lightF[1].direction   = glm::vec3( 0.0, -1.0, 0.0);
     lightF[1].ambient     = glm::vec3( 0.2,  0.2,  0.2);
     lightF[1].diffuse     = glm::vec3( 0.9,  0.9,  0.9);
     lightF[1].specular    = glm::vec3( 0.9,  0.9,  0.9);
@@ -458,9 +479,9 @@ void renderScene() {
     // Dibujamos la escena
     //drawSuelo(P,V,I);
 
-//    glm::mat4 T_cutre = glm::translate(I, glm::vec3(0.0,-0.01,0.0));
-//    glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
-//    drawSuelo(P,V,T_cutre*R_cutre);
+    glm::mat4 T_cutre = glm::translate(I, glm::vec3(0.0,-0.01,0.0));
+    glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
+    drawSuelo(P,V,T_cutre*R_cutre);
 
     drawArboles(P, V, I);
 
@@ -470,17 +491,14 @@ void renderScene() {
 
     drawCamino(P, V, I);
 
-    drawSkyBox(P,V, I);
+    drawSkyBox(P, V, I);
 
-    // Dibujar plano fondo
-//    glm::mat4 Rp = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
-//    glm::mat4 Sp = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
-//    glm::mat4 Tp = glm::translate(I, glm::vec3(-3.6, 0.0, 0.0));
-//    glDepthMask(GL_FALSE);
-//    drawObjectMat(plane, emerald, P, V, Tp*Rp*Sp);
-//    glDepthMask(GL_TRUE);
+    drawCrystalBall(P, V, I);
+
 }
 
+
+//#TODO documentar
 void drawSkyBox(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     glm::mat4 S = glm::scale(I, glm::vec3(20, 1.0, 20));
 
@@ -511,8 +529,27 @@ void drawSkyBox(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     glm::mat4 R6 = glm::rotate(I, glm::radians(180.f), glm::vec3(0,1,0));
     glm::mat4 T6 = glm::translate(I, glm::vec3(0.0, -20, 0));
     drawObjectTex(plane, texSkyBox6, P, V, M*T6*R6*S);
-
 }
+
+//#TODO documentar
+void drawCrystalBall(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+
+    // Dibujar esfera transparente
+    glDepthMask(GL_FALSE);
+    glm::mat4 Ss = glm::scale(I, glm::vec3(3.0, 3.0, 3.0));
+    drawObjectMat(sphere, ruby, P, V, M*Ss);
+    glDepthMask(GL_TRUE);
+
+    // Dibujar la base de la bola de cristal
+    glm::mat4 St = glm::scale(I, glm::vec3(4.5, 4.5, 4.5));
+    glm::mat4 Tt = glm::translate(I, glm::vec3(0.0, -5.0, 0.0));
+    drawObjectTex(torus, texFarola, P, V, M*Tt*St);
+
+    glm::mat4 Sc = glm::scale(I, glm::vec3(4.5, 0.5, 4.5));
+    glm::mat4 Tc = glm::translate(I, glm::vec3(0.0, -5.0, 0.0));
+    drawObjectTex(cylinder, texFarola, P, V, M*Tc*Sc);
+}
+
 
 /**
  * Función que añade las luces definidas previamente a la escena.
@@ -533,10 +570,21 @@ void setLights(glm::mat4 P, glm::mat4 V) {
         drawObjectTex(sphere, texLight, P, V, R*M);
     }
 
-    for(int i=0; i<NLF; i++) {
+    glm::mat4 T1 = glm::translate(I, glm::vec3(0.0,0.0,mov_l1));
+    glm::mat4 M1 = glm::translate(I,aux_pos1) * glm::scale(I,glm::vec3(0.05*0.5));
+    drawObjectTex(sphere, texLight, P, V, T1*M1);
+
+    glm::mat4 T2 = glm::translate(I, glm::vec3(0.0,0.0,mov_l2));
+//    glm::mat4 M2 = glm::translate(I,lightF[1].position) * glm::scale(I,glm::vec3(0.05*0.5));
+    glm::mat4 M2 = glm::translate(I,aux_pos2) * glm::scale(I,glm::vec3(0.05*0.5));
+    drawObjectTex(sphere, texLight, P, V, T2*M2);
+
+    /*for(int i=0; i<NLF; i++) {
+        glm::mat4 R = glm::translate(I, glm::vec3(0.0,0.0,0));
+        lightP[i].position = glm::vec3(R*glm::vec4(1.0))*glm::vec3(-1.0,1.0,-1.0);
         glm::mat4 M = glm::translate(I,lightF[i].position) * glm::scale(I,glm::vec3(0.05*0.5));
         drawObjectTex(sphere, texLight, P, V, M);
-    }
+    }*/
 }
 
 /**
@@ -601,17 +649,17 @@ void drawCar(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
     glm::mat4 S_tree = glm::scale(I, glm::vec3(0.4, 0.4, 0.4));
-    glm::mat4 T_tree1 = glm::translate(I, glm::vec3(-2.4,0.0,desFarola2));
-    glm::mat4 T_tree2 = glm::translate(I, glm::vec3(2.5,0.0,desFarola4));
-    glm::mat4 T_tree3 = glm::translate(I, glm::vec3(-2.3,0.0,desFarola6));
+    glm::mat4 T_tree1 = glm::translate(I, glm::vec3(desArbol1,0.0,desArbolZ1));
+    glm::mat4 T_tree2 = glm::translate(I, glm::vec3(desArbol2,0.0,desArbolZ2));
+    glm::mat4 T_tree3 = glm::translate(I, glm::vec3(desArbol3,0.0,desArbolZ3));
     drawObjectTex(tree, texTree, P, V, T_tree1*S_tree);
     drawObjectTex(tree, texTree, P, V, T_tree2*S_tree);
     drawObjectTex(tree, texTree, P, V, T_tree3*S_tree);
 
     glm::mat4 S_tree3 = glm::scale(I, glm::vec3(0.2, 0.2, 0.2));
-    glm::mat4 T_tree4 = glm::translate(I, glm::vec3(3.1,0.0,desFarola1));
-    glm::mat4 T_tree5 = glm::translate(I, glm::vec3(-2.7,0.0,desFarola3));
-    glm::mat4 T_tree6 = glm::translate(I, glm::vec3(2.7,0.0,desFarola5));
+    glm::mat4 T_tree4 = glm::translate(I, glm::vec3(desArbol4,0.0,desArbolZ4));
+    glm::mat4 T_tree5 = glm::translate(I, glm::vec3(desArbol5,0.0,desArbolZ5));
+    glm::mat4 T_tree6 = glm::translate(I, glm::vec3(desArbol6,0.0,desArbolZ6));
     drawObjectMat(tree3, cyan, P, V, T_tree4*S_tree3);
     drawObjectMat(tree3, cyan, P, V, T_tree5*S_tree3);
     drawObjectMat(tree3, cyan, P, V, T_tree6*S_tree3);
@@ -779,7 +827,36 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
         case GLFW_KEY_P:
             if (action == GLFW_PRESS && mods != GLFW_MOD_SHIFT)       {pausa = (pausa)? false:true;}
             if (mods == GLFW_MOD_SHIFT || mods == GLFW_MOD_CAPS_LOCK) {rot_light += 5.0;}
+            break;
 
+        /// Plegado patas
+        case GLFW_KEY_UP:
+            if(mov_l1 >= 5.0){
+                mov_l1 += 0.0;
+            } else {
+                mov_l1 += 0.1;
+                lightF[0].position[2] = lightF[0].position[2] + mov_l1/20;
+            }
+            if(mov_l2 <= -5.0){
+                mov_l2 -= 0.0;
+            } else {
+                mov_l2 -= 0.1;
+                lightF[1].position[2] = lightF[1].position[2] + mov_l2/20;
+            }
+            break;
+        case GLFW_KEY_DOWN:
+            if(mov_l1 <= -1.0){
+                mov_l1 -= 0.0;
+            } else {
+                mov_l1 -= 0.1;
+                lightF[0].position[2] = lightF[0].position[2] - mov_l1/20;
+            }
+            if(mov_l2 >= 1.0){
+                mov_l2 += 0.0;
+            } else {
+                mov_l2 += 0.1;
+                lightF[1].position[2] = lightF[1].position[2] - mov_l2/20;
+            }
             break;
 
         /// Rotacion coche
@@ -791,9 +868,25 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
         case GLFW_KEY_Q:
             desX = 0.0;
             desZ = 0.0;
-            rotY = 0.0;
+            rotY = 180.0;
             rot_farola = 0.0;
             rot_light = 0.0;
+            mov_l1 = 0.0;
+            lightF[0].position[2] = -2.0;
+            mov_l2 = 0.0;
+            lightF[1].position[2] = 2.0;
+            desArbol1 = -2.4;
+            desArbol2 = 2.5;
+            desArbol3 = -2.3;
+            desArbol4 = 3.1;
+            desArbol5 = -2.7;
+            desArbol6 = 2.7;
+            desArbolZ1 = -2.4;
+            desArbolZ2 = 0;
+            desArbolZ3 = 2.4;
+            desArbolZ4 = -3.6;
+            desArbolZ5 = -1.2;
+            desArbolZ6 = 1.2;
             lightD->ambient = glm::vec3(0.1,0.1,0.1);
             break;
 
@@ -874,8 +967,8 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods) {
     }
 }
 
-void movimiento(){
-    float varianza = 0.2;
+void movimiento() {
+    float varianza = 0.1;
 
     desFarola1 += varianza;
     desFarola2 += varianza;
@@ -884,11 +977,18 @@ void movimiento(){
     desFarola5 += varianza;
     desFarola6 += varianza;
 
-    if(desFarola1 > 3.6)
+    desArbolZ1 += varianza;
+    desArbolZ2 += varianza;
+    desArbolZ3 += varianza;
+    desArbolZ4 += varianza;
+    desArbolZ5 += varianza;
+    desArbolZ6 += varianza;
+
+    if (desFarola1 > 3.6)
         desFarola1 = -3.6;
-    else if(desFarola2 > 3.6)
+    else if (desFarola2 > 3.6)
         desFarola2 = -3.6;
-    else if(desFarola3 > 3.6)
+    else if (desFarola3 > 3.6)
         desFarola3 = -3.6;
     else if(desFarola4 > 3.6)
         desFarola4 = -3.6;
@@ -910,4 +1010,25 @@ void movimiento(){
         desplL3 = -3.2;
     else if(desplL4 > 3.2)
         desplL4 = -3.2;
+
+    if (desArbolZ1 > 3.6) {
+        desArbolZ1 = -3.6;
+        desArbol1 = -1.0 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (-2.9)));
+    } else if (desArbolZ2 > 3.6) {
+        desArbolZ2 = -3.6;
+        desArbol2 = 1.0 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.3 - 1.0)));
+    } else if (desArbolZ3 > 3.6){
+        desArbolZ3 = -3.6;
+        desArbol3 = -1.0 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (-2.9)));
+    } else if(desArbolZ4 > 3.6){
+        desArbolZ4 = -3.6;
+        desArbol4 = 1.0 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(3.3-1.0)));
+    } else if(desArbolZ5 > 3.6){
+        desArbolZ5 = -3.6;
+        desArbol5 = -1.0 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(-2.9)));
+    } else if(desArbolZ6 > 3.6){
+        desArbolZ6 = -3.6;
+        desArbol6 = 1.0 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(3.3-1.0)));
+    }
+
 }

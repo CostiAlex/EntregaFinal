@@ -1,3 +1,3 @@
-C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir
-C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/PracticaFinal.dir
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/rebuild_cache.dir
