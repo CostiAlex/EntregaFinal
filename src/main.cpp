@@ -57,6 +57,8 @@ void movimiento();
     Texture imgCamino_vol;
     Texture imgGrass;
     Texture imgGris;
+    Texture imgAsphalt;
+    Texture imgAsphaltN;
     Texture imgSkyBox1;
     Texture imgSkyBox2;
     Texture imgSkyBox3;
@@ -88,6 +90,7 @@ void movimiento();
     Textures  texCamino;
     Textures  texGrass;
     Textures  texFarola;
+    Textures  texRoad;
     Textures  texSkyBox1;
     Textures  texSkyBox2;
     Textures  texSkyBox3;
@@ -116,6 +119,11 @@ void movimiento();
     float desFarola4 = 0;
     float desFarola5 = 1.2;
     float desFarola6 = 2.4;
+
+    float desplL1 = 2.4;
+    float desplL2 = 0.8;
+    float desplL3 = -0.8;
+    float desplL4 = -2.4;
 
     bool pausa;
     bool mouseButtonClic = false;
@@ -227,12 +235,16 @@ void configScene() {
     imgCamino_vol.initTexture("resources/textures/storeNM.png");
     imgGrass.initTexture("resources/textures/grass.jpg");
     imgGris.initTexture("resources/textures/grey-concrete-texture.jpg");
-    imgSkyBox1.initTexture("resources/textures/skyBox/1.png");
-    imgSkyBox2.initTexture("resources/textures/skyBox/2.png");
-    imgSkyBox3.initTexture("resources/textures/skyBox/3.png");
-    imgSkyBox4.initTexture("resources/textures/skyBox/4.png");
-    imgSkyBox5.initTexture("resources/textures/skyBox/5.png");
-    imgSkyBox6.initTexture("resources/textures/skyBox/6.png");
+
+    imgAsphalt.initTexture("resources/textures/Asphalt_002_COLOR.jpg");
+    imgAsphaltN.initTexture("resources/textures/Asphalt_002_NORM.jpg");
+
+    imgSkyBox1.initTexture("resources/textures/skyBox/1.jpg");
+    imgSkyBox2.initTexture("resources/textures/skyBox/2.jpg");
+    imgSkyBox3.initTexture("resources/textures/skyBox/3.jpg");
+    imgSkyBox4.initTexture("resources/textures/skyBox/4.jpg");
+    imgSkyBox5.initTexture("resources/textures/skyBox/5.jpg");
+    imgSkyBox6.initTexture("resources/textures/skyBox/6.jpg");
 
     pausa = false;
     glfwSetTime(0.0f);
@@ -370,6 +382,12 @@ void configScene() {
     texFarola.normal    = 0;
     texFarola.shininess = 10.0;
 
+    texRoad.diffuse   = imgAsphalt.getTexture();
+    texRoad.specular  = imgAsphalt.getTexture();
+    texRoad.emissive  = imgAsphalt.getTexture();
+    texRoad.normal    = imgAsphaltN.getTexture();;
+    texRoad.shininess = 10.0;
+
     texSkyBox1.diffuse   = imgSkyBox1.getTexture();
     texSkyBox1.specular  = imgSkyBox1.getTexture();
     texSkyBox1.emissive  = imgSkyBox1.getTexture();
@@ -440,9 +458,9 @@ void renderScene() {
     // Dibujamos la escena
     //drawSuelo(P,V,I);
 
-    glm::mat4 T_cutre = glm::translate(I, glm::vec3(0.0,-0.01,0.0));
-    glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
-    drawSuelo(P,V,T_cutre*R_cutre);
+//    glm::mat4 T_cutre = glm::translate(I, glm::vec3(0.0,-0.01,0.0));
+//    glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
+//    drawSuelo(P,V,T_cutre*R_cutre);
 
     drawArboles(P, V, I);
 
@@ -455,39 +473,44 @@ void renderScene() {
     drawSkyBox(P,V, I);
 
     // Dibujar plano fondo
-    glm::mat4 Rp = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
-    glm::mat4 Sp = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
-    glm::mat4 Tp = glm::translate(I, glm::vec3(-3.6, 0.0, 0.0));
-    glDepthMask(GL_FALSE);
-    drawObjectMat(plane, emerald, P, V, Tp*Rp*Sp);
-    glDepthMask(GL_TRUE);
+//    glm::mat4 Rp = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
+//    glm::mat4 Sp = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
+//    glm::mat4 Tp = glm::translate(I, glm::vec3(-3.6, 0.0, 0.0));
+//    glDepthMask(GL_FALSE);
+//    drawObjectMat(plane, emerald, P, V, Tp*Rp*Sp);
+//    glDepthMask(GL_TRUE);
 }
 
 void drawSkyBox(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     glm::mat4 S = glm::scale(I, glm::vec3(20, 1.0, 20));
 
+    glm::mat4 R1 = glm::rotate(I, glm::radians(180.f), glm::vec3(1,0,0));
     glm::mat4 T1 = glm::translate(I, glm::vec3(0.0, 20, 0));
-    drawObjectTex(plane, texSkyBox1, P, V, M*T1*S);
+    drawObjectTex(plane, texSkyBox1, P, V, M*T1*R1*S);
 
     glm::mat4 R2 = glm::rotate(I, glm::radians(90.f), glm::vec3(1,0,0));
+    glm::mat4 R21 = glm::rotate(I, glm::radians(-90.f), glm::vec3(0,0,1));
     glm::mat4 T2 = glm::translate(I, glm::vec3(0.0, 0.0, -20));
-    drawObjectTex(plane, texSkyBox2, P, V, M*T2*R2*S);
+    drawObjectTex(plane, texSkyBox2, P, V, M*T2*R21*R2*S);
 
     glm::mat4 R3 = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
     glm::mat4 T3 = glm::translate(I, glm::vec3(20.0, 0.0, 0.0));
-    drawObjectTex(plane, texSkyBox3, P, V, M*T3*R3*S);
+    glm::mat4 R31 = glm::rotate(I, glm::radians(180.f), glm::vec3(1,0,0));
+    drawObjectTex(plane, texSkyBox3, P, V, M*T3*R31*R3*S);
 
     glm::mat4 R4 = glm::rotate(I, glm::radians(90.f), glm::vec3(1,0,0));
-    glm::mat4 R41 = glm::rotate(I, glm::radians(180.f), glm::vec3(1,0,0));
     glm::mat4 T4 = glm::translate(I, glm::vec3(0.0, 0.0, 20.0));
-    drawObjectTex(plane, texSkyBox4, P, V, M*T4*R4*R41*S);
+    glm::mat4 R41 = glm::rotate(I, glm::radians(-90.f), glm::vec3(0,0,1));
+    glm::mat4 R42 = glm::rotate(I, glm::radians(180.f), glm::vec3(0,1,0));
+    drawObjectTex(plane, texSkyBox4, P, V, M*T4*R42*R41*R4*S);
 
     glm::mat4 T5 = glm::translate(I, glm::vec3(-20.0, 0.0, 0.0));
     glm::mat4 R5 = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
     drawObjectTex(plane, texSkyBox5, P, V, M*T5*R3*R5*S);
 
-    glm::mat4 R6 = glm::rotate(I, glm::radians(90.f), glm::vec3(1,0,0));
-    drawObjectTex(plane, texSkyBox6, P, V, M*R6*T4*R4*S);
+    glm::mat4 R6 = glm::rotate(I, glm::radians(180.f), glm::vec3(0,1,0));
+    glm::mat4 T6 = glm::translate(I, glm::vec3(0.0, -20, 0));
+    drawObjectTex(plane, texSkyBox6, P, V, M*T6*R6*S);
 
 }
 
@@ -661,7 +684,21 @@ void drawCamino(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
     glm::mat4 S = glm::scale(I, glm::vec3(1.0,1.0,3.6));
     glm::mat4 T = glm::translate(I, glm::vec3(0.0,0.01,0.0));
-    drawObjectTex(plane, texCamino, P, V, M*T*S);
+    drawObjectTex(plane, texRoad, P, V, M * T * S);
+
+    glm::mat4 SL = glm::scale(I, glm::vec3(0.1,1.0,0.4));
+
+    glm::mat4 TL1 = glm::translate(I, glm::vec3(0.0,0.015,desplL1));
+    drawObjectTex(plane, texLight, P, V, M * TL1 * SL);
+
+    glm::mat4 TL2 = glm::translate(I, glm::vec3(0.0,0.015,desplL2));
+    drawObjectTex(plane, texLight, P, V, M * TL2 * SL);
+
+    glm::mat4 TL3 = glm::translate(I, glm::vec3(0.0,0.015,desplL3));
+    drawObjectTex(plane, texLight, P, V, M * TL3 * SL);
+
+    glm::mat4 TL4 = glm::translate(I, glm::vec3(0.0,0.015,desplL4));
+    drawObjectTex(plane, texLight, P, V, M * TL4 * SL);
 }
 
 /**
@@ -838,7 +875,7 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods) {
 }
 
 void movimiento(){
-    float varianza = 0.1;
+    float varianza = 0.2;
 
     desFarola1 += varianza;
     desFarola2 += varianza;
@@ -859,4 +896,18 @@ void movimiento(){
         desFarola5 = -3.6;
     else if(desFarola6 > 3.6)
         desFarola6 = -3.6;
+
+    desplL1 += varianza;
+    desplL2 += varianza;
+    desplL3 += varianza;
+    desplL4 += varianza;
+
+    if(desplL1 > 3.2)
+        desplL1 = -3.2;
+    else if(desplL2 > 3.2)
+        desplL2 = -3.2;
+    else if(desplL3 > 3.2)
+        desplL3 = -3.2;
+    else if(desplL4 > 3.2)
+        desplL4 = -3.2;
 }
