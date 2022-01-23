@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal
+CMAKE_SOURCE_DIR = C:\Users\Vicente\CLionProjects\PracticaFinal
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/PracticaFinal.dir/depend.make
@@ -68,58 +68,58 @@ include CMakeFiles/PracticaFinal.dir/flags.make
 CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj: CMakeFiles/PracticaFinal.dir/flags.make
 CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj: CMakeFiles/PracticaFinal.dir/includes_CXX.rsp
 CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj: ../src/Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\Model.cpp.obj -c C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Model.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PracticaFinal.dir/src/Model.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\Model.cpp.obj -c C:\Users\Vicente\CLionProjects\PracticaFinal\src\Model.cpp
 
 CMakeFiles/PracticaFinal.dir/src/Model.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PracticaFinal.dir/src/Model.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Model.cpp > CMakeFiles\PracticaFinal.dir\src\Model.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Vicente\CLionProjects\PracticaFinal\src\Model.cpp > CMakeFiles\PracticaFinal.dir\src\Model.cpp.i
 
 CMakeFiles/PracticaFinal.dir/src/Model.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PracticaFinal.dir/src/Model.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Model.cpp -o CMakeFiles\PracticaFinal.dir\src\Model.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vicente\CLionProjects\PracticaFinal\src\Model.cpp -o CMakeFiles\PracticaFinal.dir\src\Model.cpp.s
 
 CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj: CMakeFiles/PracticaFinal.dir/flags.make
 CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj: CMakeFiles/PracticaFinal.dir/includes_CXX.rsp
 CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj: ../src/Shaders.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\Shaders.cpp.obj -c C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Shaders.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\Shaders.cpp.obj -c C:\Users\Vicente\CLionProjects\PracticaFinal\src\Shaders.cpp
 
 CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Shaders.cpp > CMakeFiles\PracticaFinal.dir\src\Shaders.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Vicente\CLionProjects\PracticaFinal\src\Shaders.cpp > CMakeFiles\PracticaFinal.dir\src\Shaders.cpp.i
 
 CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PracticaFinal.dir/src/Shaders.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Shaders.cpp -o CMakeFiles\PracticaFinal.dir\src\Shaders.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vicente\CLionProjects\PracticaFinal\src\Shaders.cpp -o CMakeFiles\PracticaFinal.dir\src\Shaders.cpp.s
 
 CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj: CMakeFiles/PracticaFinal.dir/flags.make
 CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj: CMakeFiles/PracticaFinal.dir/includes_CXX.rsp
 CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj: ../src/Texture.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\Texture.cpp.obj -c C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Texture.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PracticaFinal.dir/src/Texture.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\Texture.cpp.obj -c C:\Users\Vicente\CLionProjects\PracticaFinal\src\Texture.cpp
 
 CMakeFiles/PracticaFinal.dir/src/Texture.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PracticaFinal.dir/src/Texture.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Texture.cpp > CMakeFiles\PracticaFinal.dir\src\Texture.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Vicente\CLionProjects\PracticaFinal\src\Texture.cpp > CMakeFiles\PracticaFinal.dir\src\Texture.cpp.i
 
 CMakeFiles/PracticaFinal.dir/src/Texture.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PracticaFinal.dir/src/Texture.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\Texture.cpp -o CMakeFiles\PracticaFinal.dir\src\Texture.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vicente\CLionProjects\PracticaFinal\src\Texture.cpp -o CMakeFiles\PracticaFinal.dir\src\Texture.cpp.s
 
 CMakeFiles/PracticaFinal.dir/src/main.cpp.obj: CMakeFiles/PracticaFinal.dir/flags.make
 CMakeFiles/PracticaFinal.dir/src/main.cpp.obj: CMakeFiles/PracticaFinal.dir/includes_CXX.rsp
 CMakeFiles/PracticaFinal.dir/src/main.cpp.obj: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PracticaFinal.dir/src/main.cpp.obj"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\main.cpp.obj -c C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PracticaFinal.dir/src/main.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\PracticaFinal.dir\src\main.cpp.obj -c C:\Users\Vicente\CLionProjects\PracticaFinal\src\main.cpp
 
 CMakeFiles/PracticaFinal.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PracticaFinal.dir/src/main.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\main.cpp > CMakeFiles\PracticaFinal.dir\src\main.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Vicente\CLionProjects\PracticaFinal\src\main.cpp > CMakeFiles\PracticaFinal.dir\src\main.cpp.i
 
 CMakeFiles/PracticaFinal.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PracticaFinal.dir/src/main.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\src\main.cpp -o CMakeFiles\PracticaFinal.dir\src\main.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vicente\CLionProjects\PracticaFinal\src\main.cpp -o CMakeFiles\PracticaFinal.dir\src\main.cpp.s
 
 # Object files for target PracticaFinal
 PracticaFinal_OBJECTS = \
@@ -139,7 +139,7 @@ binary/PracticaFinal.exe: CMakeFiles/PracticaFinal.dir/build.make
 binary/PracticaFinal.exe: CMakeFiles/PracticaFinal.dir/linklibs.rsp
 binary/PracticaFinal.exe: CMakeFiles/PracticaFinal.dir/objects1.rsp
 binary/PracticaFinal.exe: CMakeFiles/PracticaFinal.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable binary\PracticaFinal.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable binary\PracticaFinal.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\PracticaFinal.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -151,6 +151,6 @@ CMakeFiles/PracticaFinal.dir/clean:
 .PHONY : CMakeFiles/PracticaFinal.dir/clean
 
 CMakeFiles/PracticaFinal.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug C:\Users\pandr\Desktop\Universidad\Curso_2021_2022\IG\Practicas\PracticaFinal\cmake-build-debug\CMakeFiles\PracticaFinal.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Vicente\CLionProjects\PracticaFinal C:\Users\Vicente\CLionProjects\PracticaFinal C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug C:\Users\Vicente\CLionProjects\PracticaFinal\cmake-build-debug\CMakeFiles\PracticaFinal.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PracticaFinal.dir/depend
 

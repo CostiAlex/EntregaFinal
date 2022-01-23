@@ -3,14 +3,14 @@
 cmake_policy(SET CMP0009 NEW)
 
 # SRC_FILES at CMakeLists.txt:19 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/*.cpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/Vicente/CLionProjects/PracticaFinal/src/*.cpp")
 set(OLD_GLOB
-  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.cpp"
-  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.cpp"
-  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.cpp"
-  "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/main.cpp"
+  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/Model.cpp"
+  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/Shaders.cpp"
+  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/Texture.cpp"
+  "C:/Users/Vicente/CLionProjects/PracticaFinal/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/CMakeFiles/cmake.verify_globs")
 endif()

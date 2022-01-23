@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="PracticaFinal">
-				<Option output="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/binary/PracticaFinal.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug"/>
+				<Option output="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/binary/PracticaFinal.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/glew/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/glfw/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/glm/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/assimp/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/freeimage/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/src"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/glew/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/glfw/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/glm/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/assimp/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/freeimage/include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include/c++"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include/c++/mingw32"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include/c++/backward"/>
@@ -38,25 +38,25 @@
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 PracticaFinal"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 PracticaFinal"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="PracticaFinal/fast">
-				<Option output="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/binary/PracticaFinal.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug"/>
+				<Option output="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/binary/PracticaFinal.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/glew/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/glfw/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/glm/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/assimp/include"/>
-					<Add directory="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/../libraries2122/freeimage/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/src"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/glew/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/glfw/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/glm/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/assimp/include"/>
+					<Add directory="C:/Users/Vicente/CLionProjects/PracticaFinal/../libraries2122/freeimage/include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include/c++"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include/c++/mingw32"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include/c++/backward"/>
@@ -65,55 +65,55 @@
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 PracticaFinal/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 PracticaFinal/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Vicente/CLionProjects/PracticaFinal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.cpp">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/Model.cpp">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Model.h">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/Model.h">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.cpp">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/Shaders.cpp">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Shaders.h">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/Shaders.h">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.cpp">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/Texture.cpp">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/Texture.h">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/Texture.h">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/src/main.cpp">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/src/main.cpp">
 			<Option target="PracticaFinal"/>
 		</Unit>
-		<Unit filename="C:/Users/pandr/Desktop/Universidad/Curso_2021_2022/IG/Practicas/PracticaFinal/CMakeLists.txt">
+		<Unit filename="C:/Users/Vicente/CLionProjects/PracticaFinal/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

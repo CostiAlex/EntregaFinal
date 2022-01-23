@@ -11,12 +11,14 @@ void setLights(glm::mat4 P, glm::mat4 V);
 void drawObjectMat(Model model, Material material, glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawObjectTex(Model model, Textures textures, glm::mat4 P, glm::mat4 V, glm::mat4 M);
 
+void drawObject(Model model, glm::vec3 color, glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawFarola(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawFarolas(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawCamino(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 void drawCar(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+void drawSkyBox(glm::mat4 P, glm::mat4 V, glm::mat4 M);
 
 void funFramebufferSize(GLFWwindow* window, int width, int height);
 void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods);
@@ -24,13 +26,18 @@ void funSetScroll(GLFWwindow* window, double xoffset, double yoffset);
 void funSetCursorPos(GLFWwindow* window, double xpos, double ypos);
 void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
 
+void movimiento();
+
     // Shaders
     Shaders shaders;
 
     // Modelos
     Model plane;
+    Model triangle;
+    Model cone;
     Model cylinder;
     Model sphere;
+    Model torus;
     Model tree;
     Model car;
     Model tree2;
@@ -50,11 +57,17 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
     Texture imgCamino_vol;
     Texture imgGrass;
     Texture imgGris;
+    Texture imgSkyBox1;
+    Texture imgSkyBox2;
+    Texture imgSkyBox3;
+    Texture imgSkyBox4;
+    Texture imgSkyBox5;
+    Texture imgSkyBox6;
 
     // Luces y Materiales
     #define   NLD 1
     #define   NLP 1
-    #define   NLF 2
+    #define   NLF 1
     Light     lightG;
     Light     lightD[NLD];
     Light     lightP[NLP];
@@ -66,6 +79,7 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
     Material  bronze;
     Material  cyan;
     Material  emerald;
+
     Textures  texSuelo;
     Textures  texLight;
     Textures  texTriangle;
@@ -74,30 +88,45 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods);
     Textures  texCamino;
     Textures  texGrass;
     Textures  texFarola;
+    Textures  texSkyBox1;
+    Textures  texSkyBox2;
+    Textures  texSkyBox3;
+    Textures  texSkyBox4;
+    Textures  texSkyBox5;
+    Textures  texSkyBox6;
 
 
     // Viewport
-    int w = 500;
-    int h = 500;
+    int w = 750;
+    int h = 750;
 
     // Animaciones
     float desZ = 0.0;
     float desX = 0.0;
-    float rotY = 0.0;
+    float rotY = 180.0;
     float rot_farola = 0.0;
     float rot_light = 0.0;
     float rot_count;
     float rot_count2;
     float vFovy = 50;
 
+    float desFarola1 = -3.6;
+    float desFarola2 = -2.4;
+    float desFarola3 = -1.2;
+    float desFarola4 = 0;
+    float desFarola5 = 1.2;
+    float desFarola6 = 2.4;
+
     bool pausa;
     bool mouseButtonClic = false;
+    double cXpos, cYpos;
     bool ret = false;
 
-    double cXpos, cYpos;
+//    float alphaY = 25;
+//    float alphaX = 60;
 
     float alphaY = 25;
-    float alphaX = 60;
+    float alphaX = 0;
 
     float x = 0.0;
     float y = 0.0;
@@ -149,9 +178,7 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
         if(!pausa && glfwGetTime() > 0.01f){
-            rot_count += 1.8f;
-            rot_count2 += 3.6f;
-            glfwSetTime(0.0f);
+            movimiento();
         }
     }
     glfwDestroyWindow(window);
@@ -175,12 +202,17 @@ void configScene() {
 
     // Modelos
     plane.initModel("resources/models/plane.obj");
+    triangle.initModel("resources/models/triangle.obj");
+    cone.initModel("resources/models/cone.obj");
     cylinder.initModel("resources/models/cylinder.obj");
     sphere.initModel("resources/models/sphere.obj");
+    torus.initModel("resources/models/torus.obj");
     tree.initModel("resources/models/Tree.obj");
     car.initModel("resources/models/car.obj");
     tree2.initModel("resources/models/Lowpoly_tree_sample.obj");
     tree3.initModel("resources/models/Tree3.obj");
+
+
 
     // Imagenes (texturas)
     imgNoEmissive.initTexture("resources/textures/img1.png");
@@ -195,6 +227,12 @@ void configScene() {
     imgCamino_vol.initTexture("resources/textures/storeNM.png");
     imgGrass.initTexture("resources/textures/grass.jpg");
     imgGris.initTexture("resources/textures/grey-concrete-texture.jpg");
+    imgSkyBox1.initTexture("resources/textures/skyBox/1.png");
+    imgSkyBox2.initTexture("resources/textures/skyBox/2.png");
+    imgSkyBox3.initTexture("resources/textures/skyBox/3.png");
+    imgSkyBox4.initTexture("resources/textures/skyBox/4.png");
+    imgSkyBox5.initTexture("resources/textures/skyBox/5.png");
+    imgSkyBox6.initTexture("resources/textures/skyBox/6.png");
 
     pausa = false;
     glfwSetTime(0.0f);
@@ -331,6 +369,42 @@ void configScene() {
     texFarola.emissive  = imgGris.getTexture();
     texFarola.normal    = 0;
     texFarola.shininess = 10.0;
+
+    texSkyBox1.diffuse   = imgSkyBox1.getTexture();
+    texSkyBox1.specular  = imgSkyBox1.getTexture();
+    texSkyBox1.emissive  = imgSkyBox1.getTexture();
+    texSkyBox1.normal    = 0;
+    texSkyBox1.shininess = 10.0;
+
+    texSkyBox2.diffuse   = imgSkyBox2.getTexture();
+    texSkyBox2.specular  = imgSkyBox2.getTexture();
+    texSkyBox2.emissive  = imgSkyBox2.getTexture();
+    texSkyBox2.normal    = 0;
+    texSkyBox2.shininess = 10.0;
+
+    texSkyBox3.diffuse   = imgSkyBox3.getTexture();
+    texSkyBox3.specular  = imgSkyBox3.getTexture();
+    texSkyBox3.emissive  = imgSkyBox3.getTexture();
+    texSkyBox3.normal    = 0;
+    texSkyBox3.shininess = 10.0;
+
+    texSkyBox4.diffuse   = imgSkyBox4.getTexture();
+    texSkyBox4.specular  = imgSkyBox4.getTexture();
+    texSkyBox4.emissive  = imgSkyBox4.getTexture();
+    texSkyBox4.normal    = 0;
+    texSkyBox4.shininess = 10.0;
+
+    texSkyBox5.diffuse   = imgSkyBox5.getTexture();
+    texSkyBox5.specular  = imgSkyBox5.getTexture();
+    texSkyBox5.emissive  = imgSkyBox5.getTexture();
+    texSkyBox5.normal    = 0;
+    texSkyBox5.shininess = 10.0;
+
+    texSkyBox6.diffuse   = imgSkyBox6.getTexture();
+    texSkyBox6.specular  = imgSkyBox6.getTexture();
+    texSkyBox6.emissive  = imgSkyBox6.getTexture();
+    texSkyBox6.normal    = 0;
+    texSkyBox6.shininess = 10.0;
 }
 
 void renderScene() {
@@ -343,6 +417,7 @@ void renderScene() {
     shaders.useShaders();
 
     // Matriz P
+//    float fovy   = 40.0;
     float fovy   = vFovy;
     float nplane =  0.1;
     float fplane = 50.0;
@@ -363,7 +438,7 @@ void renderScene() {
     setLights(P,V);
 
     // Dibujamos la escena
-    drawSuelo(P,V,I);
+    //drawSuelo(P,V,I);
 
     glm::mat4 T_cutre = glm::translate(I, glm::vec3(0.0,-0.01,0.0));
     glm::mat4 R_cutre = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
@@ -377,6 +452,8 @@ void renderScene() {
 
     drawCamino(P, V, I);
 
+    drawSkyBox(P,V, I);
+
     // Dibujar plano fondo
     glm::mat4 Rp = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
     glm::mat4 Sp = glm::scale(I, glm::vec3(3.6, 1.0, 3.6));
@@ -384,6 +461,34 @@ void renderScene() {
     glDepthMask(GL_FALSE);
     drawObjectMat(plane, emerald, P, V, Tp*Rp*Sp);
     glDepthMask(GL_TRUE);
+}
+
+void drawSkyBox(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+    glm::mat4 S = glm::scale(I, glm::vec3(20, 1.0, 20));
+
+    glm::mat4 T1 = glm::translate(I, glm::vec3(0.0, 20, 0));
+    drawObjectTex(plane, texSkyBox1, P, V, M*T1*S);
+
+    glm::mat4 R2 = glm::rotate(I, glm::radians(90.f), glm::vec3(1,0,0));
+    glm::mat4 T2 = glm::translate(I, glm::vec3(0.0, 0.0, -20));
+    drawObjectTex(plane, texSkyBox2, P, V, M*T2*R2*S);
+
+    glm::mat4 R3 = glm::rotate(I, glm::radians(90.f), glm::vec3(0,0,1));
+    glm::mat4 T3 = glm::translate(I, glm::vec3(20.0, 0.0, 0.0));
+    drawObjectTex(plane, texSkyBox3, P, V, M*T3*R3*S);
+
+    glm::mat4 R4 = glm::rotate(I, glm::radians(90.f), glm::vec3(1,0,0));
+    glm::mat4 R41 = glm::rotate(I, glm::radians(180.f), glm::vec3(1,0,0));
+    glm::mat4 T4 = glm::translate(I, glm::vec3(0.0, 0.0, 20.0));
+    drawObjectTex(plane, texSkyBox4, P, V, M*T4*R4*R41*S);
+
+    glm::mat4 T5 = glm::translate(I, glm::vec3(-20.0, 0.0, 0.0));
+    glm::mat4 R5 = glm::rotate(I, glm::radians(180.f), glm::vec3(0,0,1));
+    drawObjectTex(plane, texSkyBox5, P, V, M*T5*R3*R5*S);
+
+    glm::mat4 R6 = glm::rotate(I, glm::radians(90.f), glm::vec3(1,0,0));
+    drawObjectTex(plane, texSkyBox6, P, V, M*R6*T4*R4*S);
+
 }
 
 /**
@@ -473,17 +578,17 @@ void drawCar(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
     glm::mat4 S_tree = glm::scale(I, glm::vec3(0.4, 0.4, 0.4));
-    glm::mat4 T_tree1 = glm::translate(I, glm::vec3(-2.6,0.0,-3.0));
-    glm::mat4 T_tree2 = glm::translate(I, glm::vec3(2.5,0.0,0.0));
-    glm::mat4 T_tree3 = glm::translate(I, glm::vec3(-2.3,0.0,2.4));
+    glm::mat4 T_tree1 = glm::translate(I, glm::vec3(-2.4,0.0,desFarola2));
+    glm::mat4 T_tree2 = glm::translate(I, glm::vec3(2.5,0.0,desFarola4));
+    glm::mat4 T_tree3 = glm::translate(I, glm::vec3(-2.3,0.0,desFarola6));
     drawObjectTex(tree, texTree, P, V, T_tree1*S_tree);
     drawObjectTex(tree, texTree, P, V, T_tree2*S_tree);
     drawObjectTex(tree, texTree, P, V, T_tree3*S_tree);
 
     glm::mat4 S_tree3 = glm::scale(I, glm::vec3(0.2, 0.2, 0.2));
-    glm::mat4 T_tree4 = glm::translate(I, glm::vec3(3.1,0.0,3.5));
-    glm::mat4 T_tree5 = glm::translate(I, glm::vec3(-2.7,0.0,0.0));
-    glm::mat4 T_tree6 = glm::translate(I, glm::vec3(2.7,0.0,-3.1));
+    glm::mat4 T_tree4 = glm::translate(I, glm::vec3(3.1,0.0,desFarola1));
+    glm::mat4 T_tree5 = glm::translate(I, glm::vec3(-2.7,0.0,desFarola3));
+    glm::mat4 T_tree6 = glm::translate(I, glm::vec3(2.7,0.0,desFarola5));
     drawObjectMat(tree3, cyan, P, V, T_tree4*S_tree3);
     drawObjectMat(tree3, cyan, P, V, T_tree5*S_tree3);
     drawObjectMat(tree3, cyan, P, V, T_tree6*S_tree3);
@@ -497,16 +602,21 @@ void drawArboles(glm::mat4 P, glm::mat4 V, glm::mat4 M){
  * @param M
  */
 void drawFarolas(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-
-    glm::mat4 T1 = glm::translate(I, glm::vec3(-1.0,0.0,-2.0));
-    glm::mat4 T2 = glm::translate(I, glm::vec3(-1.0,0.0,1.0));
-    glm::mat4 T3 = glm::translate(I, glm::vec3(1.0,0.0,2.0));
-    glm::mat4 T4 = glm::translate(I, glm::vec3(1.0,0.0,-1.0));
     glm::mat4 R = glm::rotate(I, glm::radians(rot_farola), glm::vec3(0,1,0));
+
+    glm::mat4 T1 = glm::translate(I, glm::vec3(-1.0,0.0,desFarola1));
+    glm::mat4 T2 = glm::translate(I, glm::vec3(1.0,0.0, desFarola2));
+    glm::mat4 T3 = glm::translate(I, glm::vec3(-1.0,0.0,desFarola3));
+    glm::mat4 T4 = glm::translate(I, glm::vec3(1.0,0.0, desFarola4));
+    glm::mat4 T5 = glm::translate(I, glm::vec3(-1.0,0.0,desFarola5));
+    glm::mat4 T6 = glm::translate(I, glm::vec3(1.0,0.0, desFarola6));
+
     drawFarola(P,V,T1*M*R);
     drawFarola(P,V,T2*M*R);
     drawFarola(P,V,T3*M*R);
     drawFarola(P,V,T4*M*R);
+    drawFarola(P,V,T5*M*R);
+    drawFarola(P,V,T6*M*R);
 }
 
 /**
@@ -640,6 +750,7 @@ void funKey(GLFWwindow* window, int key  , int scancode, int action, int mods) {
         case GLFW_KEY_LEFT: rot_farola -= 5; break;
 
         /// Reset escena a situación inicial
+        /// Reset helicoptero a posicion inicial
         case GLFW_KEY_Q:
             desX = 0.0;
             desZ = 0.0;
@@ -724,4 +835,28 @@ void funMouseButton(GLFWwindow* _window, int button, int action, int mods) {
             mouseButtonClic = false;
         }
     }
+}
+
+void movimiento(){
+    float varianza = 0.1;
+
+    desFarola1 += varianza;
+    desFarola2 += varianza;
+    desFarola3 += varianza;
+    desFarola4 += varianza;
+    desFarola5 += varianza;
+    desFarola6 += varianza;
+
+    if(desFarola1 > 3.6)
+        desFarola1 = -3.6;
+    else if(desFarola2 > 3.6)
+        desFarola2 = -3.6;
+    else if(desFarola3 > 3.6)
+        desFarola3 = -3.6;
+    else if(desFarola4 > 3.6)
+        desFarola4 = -3.6;
+    else if(desFarola5 > 3.6)
+        desFarola5 = -3.6;
+    else if(desFarola6 > 3.6)
+        desFarola6 = -3.6;
 }
